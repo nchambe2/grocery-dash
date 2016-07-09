@@ -36,23 +36,21 @@ public class ItemCatalogTest {
 
     @Test
     public void shouldDisplayASingleGroceryItemWhenThereAreIsOneAvailableGroceryItem() {
-        when(itemOne.getTitle()).thenReturn("Item One");
         availableGroceryItems.add(itemOne);
 
         itemCatalog.list();
 
-        verify(printStream).println(contains("Item One"));
+        verify(itemOne).getTitle();
     }
 
     @Test
     public void shouldDisplayTwoGroceryItemsWhenThereAreTwoAvailableGroceryItems() {
-        when(itemOne.getTitle()).thenReturn("Item One");
-        when(itemOne.getTitle()).thenReturn("Item Two");
         availableGroceryItems.add(itemOne);
         availableGroceryItems.add(itemTwo);
 
         itemCatalog.list();
 
-        verify(printStream).println(contains("Item Two"));
+        verify(itemOne).getTitle();
+        verify(itemTwo).getTitle();
     }
 }
