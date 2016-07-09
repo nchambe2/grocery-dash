@@ -30,17 +30,16 @@ public class ItemCatalogTest {
     public void shouldDisplayAvailableGroceryItemHeaderWhenListingAvailableGroceryItems() {
         itemCatalog.list();
 
-        verify(printStream).println(contains("Item Name"));
+        verify(printStream).println(contains("Name"));
     }
 
-
     @Test
-    public void shouldDisplayASingleGroceryItemWhenThereAreIsOneAvailableGroceryItem() {
+    public void shouldDisplayASingleGroceryItemWhenThereAreIsOneAvailableGroceryItemX() {
         availableGroceryItems.add(itemOne);
 
         itemCatalog.list();
 
-        verify(itemOne).getTitle();
+        verify(itemOne).details();
     }
 
     @Test
@@ -50,7 +49,7 @@ public class ItemCatalogTest {
 
         itemCatalog.list();
 
-        verify(itemOne).getTitle();
-        verify(itemTwo).getTitle();
+        verify(itemOne).details();
+        verify(itemTwo).details();
     }
 }

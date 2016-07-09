@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
         Collection<Item> availableGroceryItems = new ArrayList<>();
-        Item oscarMeyerHotDog = new Item("Oscar Meyer Hot Dog");
-        Item tazoPassionTea = new Item("Tazo Passion Tea");
+        Item oscarMeyerHotDog = new Item("Oscar Meyer Hot Dog", "Very Tasty Hot Dog", "Meat", "$3.99");
+        Item tazoPassionTea = new Item("Tazo Passion Tea", "Flowery Tea", "Tea", "$4.99");
         availableGroceryItems.add(oscarMeyerHotDog);
         availableGroceryItems.add(tazoPassionTea);
         ItemCatalog itemCatalog = new ItemCatalog(printStream, availableGroceryItems);

@@ -14,11 +14,11 @@ public class ItemCatalog {
         displayItemHeaderTitle();
 
         for(Item item : availableGroceryItems) {
-            printStream.println(item.getTitle());
+            printStream.println(item.details());
         }
     }
 
     private void displayItemHeaderTitle() {
-        printStream.println("Item Name:\n--------------------");
+        printStream.println("Name      | Description     | Category      | Price\n----------------------------------------------------");
     }
 }
