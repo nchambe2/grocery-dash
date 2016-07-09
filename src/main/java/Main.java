@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,14 +13,18 @@ public class Main {
         availableGroceryItems.add(oscarMeyerHotDog);
         availableGroceryItems.add(tazoPassionTea);
         ItemCatalog itemCatalog = new ItemCatalog(printStream, availableGroceryItems);
-        Application applicationx = new Application(itemCatalog);
+        Menu menu = new Menu(printStream, itemCatalog);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        Application applicationx = new Application(menu, bufferedReader);
 
         applicationx.start();
 
-        //display all items in the grocery store when app starts
-        //application
-        //Item catalog = contains all items
-        //avaliable grocery list = place each individual item into the list
-        //item = has a title
     }
+
+    //instead of seeing the item automatically
+    //display menu option = browse by item
+    //get user input
+    //if correct browse by item
+    //display invalid option
+    //prompt again
 }
