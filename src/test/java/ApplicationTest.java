@@ -3,13 +3,15 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class ApplicationXTest {
+public class ApplicationTest {
+
+
     @Test
     public void shouldDisplayAllAvailableItemsInTheGroceryStoreWhenApplicationStarts () {
         ItemCatalog itemCatalog = mock(ItemCatalog.class);
-        ApplicationX applicationX = new ApplicationX(itemCatalog);
+        Application application = new Application(itemCatalog);
 
-        applicationX.start();
+        application.start();
 
         verify(itemCatalog).list();
     }

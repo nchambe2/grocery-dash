@@ -3,23 +3,25 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.*;
 
 public class ItemCatalogTest {
 
     private PrintStream printStream;
-    private List<String> availableGroceryItems;
+    private Collection<Item> availableGroceryItems;
     private ItemCatalog itemCatalog;
+    private Item itemOne;
+    private Item itemTwo;
 
     @Before
     public void setUp () {
         printStream = mock(PrintStream.class);
         availableGroceryItems = new ArrayList<>();
+        itemOne = mock(Item.class);
+        itemTwo = mock(Item.class);
         itemCatalog = new ItemCatalog(printStream, availableGroceryItems);
 
     }
@@ -34,17 +36,20 @@ public class ItemCatalogTest {
 
     @Test
     public void shouldDisplayASingleGroceryItemWhenThereAreIsOneAvailableGroceryItem() {
-        availableGroceryItems.add("Item One");
+        when(itemOne.getTitle()).thenReturn("Item One");
+        availableGroceryItems.add(itemOne);
 
         itemCatalog.list();
 
-        verify(printStream).println(contains("Item One"));
+        verify(printStream, times(2)).println(contains("Ite"));
     }
 
     @Test
     public void shouldDisplayTwoGroceryItemsWhenThereAreTwoAvailableGroceryItems() {
-        availableGroceryItems.add("Item One");
-        availableGroceryItems.add("Item Two");
+        when(itemOne.getTitle()).thenReturn("Item One");
+        when(itemOne.getTitle()).thenReturn("Item Two");
+        availableGroceryItems.add(itemOne);
+        availableGroceryItems.add(itemTwo);
 
         itemCatalog.list();
 

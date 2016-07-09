@@ -1,7 +1,7 @@
-public class ApplicationX {
+public class Application {
     private final ItemCatalog itemCatalog;
 
-    public ApplicationX(ItemCatalog itemCatalog) {
+    public Application(ItemCatalog itemCatalog) {
 
         this.itemCatalog = itemCatalog;
     }

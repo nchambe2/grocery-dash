@@ -1,11 +1,11 @@
 import java.io.PrintStream;
-import java.util.List;
+import java.util.Collection;
 
 public class ItemCatalog {
     private final PrintStream printStream;
-    private final List<String> availableGroceryItems;
+    private final Collection<Item> availableGroceryItems;
 
-    public ItemCatalog(PrintStream printStream, List<String> availableGroceryItems) {
+    public ItemCatalog(PrintStream printStream, Collection<Item> availableGroceryItems) {
         this.printStream = printStream;
         this.availableGroceryItems = availableGroceryItems;
     }
@@ -13,8 +13,8 @@ public class ItemCatalog {
     public void list() {
         displayItemHeaderTitle();
 
-        for(String item : availableGroceryItems) {
-            printStream.println(item);
+        for(Item item : availableGroceryItems) {
+            printStream.println(item.getTitle());
         }
     }
 

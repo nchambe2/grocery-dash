@@ -1,15 +1,17 @@
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class Main {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
-        List<String> availableGroceryItems = new ArrayList<>();
-        availableGroceryItems.add("Oscar Meyer Hot Dog");
-        availableGroceryItems.add("Tazo Passion Tea");
+        Collection<Item> availableGroceryItems = new ArrayList<>();
+        Item oscarMeyerHotDog = new Item("Oscar Meyer Hot Dog");
+        Item tazoPassionTea = new Item("Tazo Passion Tea");
+        availableGroceryItems.add(oscarMeyerHotDog);
+        availableGroceryItems.add(tazoPassionTea);
         ItemCatalog itemCatalog = new ItemCatalog(printStream, availableGroceryItems);
-        ApplicationX applicationx = new ApplicationX(itemCatalog);
+        Application applicationx = new Application(itemCatalog);
 
         applicationx.start();
 
