@@ -13,12 +13,14 @@ public class ApplicationTest {
     private Menu menu;
     private Application application;
     private BufferedReader bufferedReader;
+    private MenuValidator menuValidator;
 
     @Before
     public void setUp() {
         menu = mock(Menu.class);
         bufferedReader = mock(BufferedReader.class);
-        application = new Application(menu, bufferedReader);
+        menuValidator = mock(MenuValidator.class);
+        application = new Application(menu, menuValidator, bufferedReader);
     }
 
     @Test
@@ -32,7 +34,7 @@ public class ApplicationTest {
     public void shouldValidateUserMenuOptionSelectionWhenCalled() throws IOException {
         application.start();
 
-        verify(menu).validate(anyString());
+        verify(menuValidator).validate(anyString());
     }
 }
 

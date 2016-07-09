@@ -13,18 +13,12 @@ public class Main {
         availableGroceryItems.add(oscarMeyerHotDog);
         availableGroceryItems.add(tazoPassionTea);
         ItemCatalog itemCatalog = new ItemCatalog(printStream, availableGroceryItems);
-        Menu menu = new Menu(printStream, itemCatalog);
+        Menu menu = new Menu(printStream);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Application application = new Application(menu, bufferedReader);
+        MenuValidator menuValidator = new MenuValidator(itemCatalog, printStream);
+        Application application = new Application(menu, menuValidator, bufferedReader);
 
         application.start();
 
     }
-
-    //instead of seeing the item automatically
-    //display menu option = browse by item
-    //get user input
-    //if correct browse by item
-    //display invalid option
-    //prompt again
 }

@@ -41,7 +41,7 @@ public class ItemCatalogTest {
 
         itemCatalog.list();
 
-        verify(printStream, times(2)).println(contains("Item One"));
+        verify(printStream).println(contains("Item One"));
     }
 
     @Test
