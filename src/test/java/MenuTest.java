@@ -28,9 +28,16 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldListAllAvailableGroceryItemsWhenUserInputisBrowseItems() {
+    public void shouldListAllAvailableGroceryItemsWhenUserInputIsBrowseItems() {
         menu.validate("Browse by Items");
 
         verify(itemCatalog).list();
+    }
+
+    @Test
+    public void shouldDisplaySelectionIsInvalidMessageWhenUserInputIsNotBrowseItems() {
+        menu.validate("dfjslj");
+
+        verify(printStream).println(contains("Invalid Selection"));
     }
 }

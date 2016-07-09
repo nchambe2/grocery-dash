@@ -15,9 +15,9 @@ public class Main {
         ItemCatalog itemCatalog = new ItemCatalog(printStream, availableGroceryItems);
         Menu menu = new Menu(printStream, itemCatalog);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Application applicationx = new Application(menu, bufferedReader);
+        Application application = new Application(menu, bufferedReader);
 
-        applicationx.start();
+        application.start();
 
     }
 

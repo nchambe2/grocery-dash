@@ -17,6 +17,8 @@ public class Menu {
     public void validate(String userInput) {
         if(userInput.equals("Browse by Items")) {
             itemCatalog.list();
+        } else {
+            printStream.println("Invalid Selection");
         }
     }
 }
