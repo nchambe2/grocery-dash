@@ -14,4 +14,8 @@ public class Item {
     public String details() {
         return String.join(" | " , title, description, category.getTitle(), price);
     }
+
+    public String getCategoryName() {
+        return category.getTitle();
+    }
 }

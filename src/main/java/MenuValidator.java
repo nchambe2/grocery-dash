@@ -11,18 +11,15 @@ public class MenuValidator {
     }
 
     public void validate(String userInput) {
-        if (userInput.equals("Browse by Items")) {
+        if (userInput.equals("Browse Available Items")) {
             itemCatalog.listItems();
-        } else if (userInput.equals("Browse by Category")) {
+        } else if (userInput.equals("Browse Available Categories")) {
             itemCatalog.listCategories();
+        } else if(userInput.equals("Browse Available Items In A Category")) {
+            itemCatalog.listItemsInASpecificCategory();
         } else {
             printStream.println("Invalid Selection");
         }
     }
 
-
-    //or I print the categories
-    //prompt the user to enter a category
-    //then search through the available items
-    //print items to the console that have that category
 }

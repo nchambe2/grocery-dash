@@ -18,8 +18,8 @@ public class Application {
     public void start() {
         printStream.println("Welcome to Grocery Dash!");
         menu.display();
-        String userInput = getUserInput();
-        menuValidator.validate(userInput);
+        String userMenuSelection = getUserInput();
+        menuValidator.validate(userMenuSelection);
     }
 
     private String getUserInput() {

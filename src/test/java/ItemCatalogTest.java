@@ -1,11 +1,12 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.*;
 
 public class ItemCatalogTest {
@@ -18,6 +19,7 @@ public class ItemCatalogTest {
     private Collection<Category> availableCategories;
     private Category categoryOne;
     private Category categoryTwo;
+    private BufferedReader bufferedReader;
 
     @Before
     public void setUp () {
@@ -28,7 +30,8 @@ public class ItemCatalogTest {
         availableCategories = new ArrayList<>();
         categoryOne = mock(Category.class);
         categoryTwo = mock(Category.class);
-        itemCatalog = new ItemCatalog(printStream, availableGroceryItems, availableCategories);
+        bufferedReader = mock(BufferedReader.class);
+        itemCatalog = new ItemCatalog(printStream, bufferedReader, availableGroceryItems, availableCategories);
     }
 
     @Test
@@ -69,6 +72,28 @@ public class ItemCatalogTest {
 
         verify(categoryOne).getTitle();
         verify(categoryTwo).getTitle();
+    }
+
+    @Test
+    public void shouldPromptUserToEnterAnAvailableCategoryWhenListingItemsInASpecificCategory() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("Category");
+
+        itemCatalog.listItemsInASpecificCategory();
+
+        verify(printStream).println(contains("Enter A Category"));
+
+    }
+
+    @Test
+    public void shouldDisplayASingleItemInACategoryWhenThereIsOnlyOneAvailableItemInACategory() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("Category");
+        when(itemOne.getCategoryName()).thenReturn("Category");
+        availableCategories.add(categoryOne);
+        availableGroceryItems.add(itemOne);
+
+        itemCatalog.listItemsInASpecificCategory();
+
+        verify(itemOne).details();
     }
 
 }
