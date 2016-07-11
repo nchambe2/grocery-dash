@@ -9,7 +9,10 @@ public class Menu {
     }
 
     public void display() {
-        printStream.println("Browse by Items");
+        printStream.println("Select From The Following Options:\n" +
+                            "Browse Available Items\n" +
+                            "Browse Available Categories\n" +
+                            "Browse Available Items In A Category");
     }
 
 }

@@ -22,7 +22,21 @@ public class MenuTest {
     public void shouldDisplayBrowseByItemsAsAnOptionWhenMenuIsDisplayed() {
         menu.display();
 
-        verify(printStream).println(contains("Browse by Items"));
+        verify(printStream).println(contains("Browse Available Items"));
+    }
+
+    @Test
+    public void shouldDisplayBrowseByCategoryAsAnOptionWhenMenuIsDisplayed() {
+        menu.display();
+
+        verify(printStream).println(contains("Browse Available Categories"));
+    }
+
+    @Test
+    public void shouldDisplayBrowseAvailableItemsInACategoryWhenMenuIsDisplayed() {
+        menu.display();
+
+        verify(printStream).println(contains("Browse Available Items In A Category"));
     }
 
 }
