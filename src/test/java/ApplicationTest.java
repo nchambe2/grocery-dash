@@ -1,3 +1,4 @@
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,17 +15,17 @@ public class ApplicationTest {
 
     private Menu menu;
     private Application application;
-    private BufferedReader bufferedReader;
     private MenuValidator menuValidator;
     private PrintStream printStream;
+    private UserInput userInput;
 
     @Before
     public void setUp() {
         menu = mock(Menu.class);
-        bufferedReader = mock(BufferedReader.class);
         menuValidator = mock(MenuValidator.class);
         printStream = mock(PrintStream.class);
-        application = new Application(menu, menuValidator, bufferedReader, printStream);
+        userInput = mock(UserInput.class);
+        application = new Application(menu, menuValidator, userInput, printStream);
     }
 
     @Test

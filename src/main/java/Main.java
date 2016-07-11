@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        UserInput userInput = new UserInput(bufferedReader);
         Collection<Item> availableGroceryItems = new ArrayList<>();
         Collection<Category> availableCategories = new ArrayList<>();
         Category meat = new Category("Meat");
@@ -18,10 +19,10 @@ public class Main {
         Item tazoPassionTea = new Item("Tazo Passion Tea", "Flowery Tea", tea, "$4.99");
         availableGroceryItems.add(oscarMeyerHotDog);
         availableGroceryItems.add(tazoPassionTea);
-        ItemCatalog itemCatalog = new ItemCatalog(printStream, bufferedReader, availableGroceryItems, availableCategories);
+        ItemCatalog itemCatalog = new ItemCatalog(printStream, userInput, availableGroceryItems, availableCategories);
         Menu menu = new Menu(printStream);
         MenuValidator menuValidator = new MenuValidator(itemCatalog, printStream);
-        Application application = new Application(menu, menuValidator, bufferedReader, printStream);
+        Application application = new Application(menu, menuValidator, userInput, printStream);
 
         application.start();
 

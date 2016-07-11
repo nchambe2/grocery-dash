@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class ItemCatalogTest {
     private Collection<Category> availableCategories;
     private Category categoryOne;
     private Category categoryTwo;
-    private BufferedReader bufferedReader;
+    private UserInput userInput;
 
     @Before
     public void setUp () {
@@ -30,8 +29,8 @@ public class ItemCatalogTest {
         availableCategories = new ArrayList<>();
         categoryOne = mock(Category.class);
         categoryTwo = mock(Category.class);
-        bufferedReader = mock(BufferedReader.class);
-        itemCatalog = new ItemCatalog(printStream, bufferedReader, availableGroceryItems, availableCategories);
+        userInput = mock(UserInput.class);
+        itemCatalog = new ItemCatalog(printStream, userInput, availableGroceryItems, availableCategories);
     }
 
     @Test
@@ -76,7 +75,7 @@ public class ItemCatalogTest {
 
     @Test
     public void shouldPromptUserToEnterAnAvailableCategoryWhenListingItemsInASpecificCategory() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("Category");
+        when(userInput.getInput()).thenReturn("Category");
 
         itemCatalog.listItemsInASpecificCategory();
 
@@ -86,7 +85,7 @@ public class ItemCatalogTest {
 
     @Test
     public void shouldDisplayASingleItemInACategoryWhenThereIsOnlyOneAvailableItemInACategory() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("Category");
+        when(userInput.getInput()).thenReturn("Category");
         when(itemOne.getCategoryName()).thenReturn("Category");
         availableCategories.add(categoryOne);
         availableGroceryItems.add(itemOne);
