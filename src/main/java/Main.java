@@ -21,8 +21,8 @@ public class Main {
         availableGroceryItems.add(tazoPassionTea);
         ItemCatalog itemCatalog = new ItemCatalog(printStream, userInput, availableGroceryItems, availableCategories);
         Menu menu = new Menu(printStream);
-        MenuValidator menuValidator = new MenuValidator(itemCatalog, printStream);
-        Application application = new Application(menu, menuValidator, userInput, printStream);
+        MenuValidator menuValidator = new MenuValidator(itemCatalog, printStream, userInput);
+        Application application = new Application(menu, menuValidator, printStream);
 
         application.start();
 

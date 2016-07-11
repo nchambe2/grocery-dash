@@ -16,42 +16,50 @@ public class MenuValidatorTest {
     private PrintStream printStream;
     private MenuValidator menuValidator;
     private BufferedReader bufferedReader;
+    private UserInput userInput;
 
     @Before
     public void setUp() {
         itemCatalog = mock(ItemCatalog.class);
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
-        menuValidator = new MenuValidator(itemCatalog, printStream);
+        userInput = mock(UserInput.class);
+        menuValidator = new MenuValidator(itemCatalog, printStream, userInput);
 
     }
 
     @Test
     public void shouldListAllAvailableGroceryItemsWhenUserInputIsBrowseItems() {
-        menuValidator.validate("Browse Available Items");
+        when(userInput.getInput()).thenReturn("Browse Available Items");
+
+        menuValidator.validate();
 
         verify(itemCatalog).listItems();
     }
 
     @Test
     public void shouldListAllAvailableCategoriesWhenUserInputIsBrowseByCategory() {
-        menuValidator.validate("Browse Available Categories");
+        when(userInput.getInput()).thenReturn("Browse Available Categories");
+
+        menuValidator.validate();
 
         verify(itemCatalog).listCategories();
     }
 
     @Test
     public void shouldListAllAvailableItemsInASpecificCategoryWhenUserInputIsBrowseByAvailableCategory() throws IOException {
-       when(bufferedReader.readLine()).thenReturn("Category");
+        when(userInput.getInput()).thenReturn("Browse Available Items In A Category");
 
-        menuValidator.validate("Browse Available Items In A Category");
+        menuValidator.validate();
 
         verify(itemCatalog).listItemsInASpecificCategory();
     }
 
     @Test
     public void shouldDisplaySelectionIsInvalidMessageWhenUserInputIsNotBrowseItems() {
-        menuValidator.validate("fdsjal");
+        when(userInput.getInput()).thenReturn("jfdskl");
+
+        menuValidator.validate();
 
         verify(printStream).println(contains("Invalid Selection"));
     }

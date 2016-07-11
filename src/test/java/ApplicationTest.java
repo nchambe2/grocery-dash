@@ -1,12 +1,9 @@
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -25,7 +22,7 @@ public class ApplicationTest {
         menuValidator = mock(MenuValidator.class);
         printStream = mock(PrintStream.class);
         userInput = mock(UserInput.class);
-        application = new Application(menu, menuValidator, userInput, printStream);
+        application = new Application(menu, menuValidator, printStream);
     }
 
     @Test
@@ -46,7 +43,7 @@ public class ApplicationTest {
     public void shouldValidateUserMenuOptionSelectionWhenCalled() throws IOException {
         application.start();
 
-        verify(menuValidator).validate(anyString());
+        verify(menuValidator).validate();
     }
 }
 
