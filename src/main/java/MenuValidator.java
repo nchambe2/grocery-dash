@@ -1,29 +1,28 @@
 import java.io.PrintStream;
+import java.util.Map;
 
 public class MenuValidator {
-    private final ItemCatalog itemCatalog;
     private final PrintStream printStream;
     private final UserInput userInput;
+    private final Map<String, Command> groceryCommands;
 
-    public MenuValidator(ItemCatalog itemCatalog, PrintStream printStream, UserInput userInput) {
+    public MenuValidator(PrintStream printStream, UserInput userInput, Map<String, Command> groceryCommands) {
 
-        this.itemCatalog = itemCatalog;
         this.printStream = printStream;
         this.userInput = userInput;
+        this.groceryCommands = groceryCommands;
     }
+
 
     public void validate() {
         String menuSelection = userInput.getInput();
 
-        if(menuSelection.equals("Browse Available Items")) {
-            itemCatalog.listItems();
-        } else if (menuSelection.equals("Browse Available Categories")) {
-            itemCatalog.listCategories();
-        } else if(menuSelection.equals("Browse Available Items In A Category")) {
-            itemCatalog.listItemsInASpecificCategory();
+        if(groceryCommands.containsKey(menuSelection)) {
+            groceryCommands.get(menuSelection).run();
         } else {
             printStream.println("Invalid Selection");
         }
+
     }
 
 }

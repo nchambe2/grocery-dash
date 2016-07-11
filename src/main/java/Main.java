@@ -3,6 +3,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +23,14 @@ public class Main {
         availableGroceryItems.add(tazoPassionTea);
         ItemCatalog itemCatalog = new ItemCatalog(printStream, userInput, availableGroceryItems, availableCategories);
         Menu menu = new Menu(printStream);
-        MenuValidator menuValidator = new MenuValidator(itemCatalog, printStream, userInput);
+        Command browseAvailableItemsCommand = new BrowseAvailableItemsCommand(itemCatalog);
+        Command browseAvailableCategoriesCommand = new BrowseAvailableCategoriesCommand(itemCatalog);
+        Command browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog);
+        Map<String, Command> groceryCommands = new HashMap<>();
+        groceryCommands.put("Browse Available Items", browseAvailableItemsCommand);
+        groceryCommands.put("Browse Available Categories", browseAvailableCategoriesCommand);
+        groceryCommands.put("Browse Available Items In A Category", browseAvailableItemsInACategoryCommand);
+        MenuValidator menuValidator = new MenuValidator(printStream, userInput, groceryCommands);
         Application application = new Application(menu, menuValidator, printStream);
 
         application.start();

@@ -14,14 +14,12 @@ public class ApplicationTest {
     private Application application;
     private MenuValidator menuValidator;
     private PrintStream printStream;
-    private UserInput userInput;
 
     @Before
     public void setUp() {
         menu = mock(Menu.class);
         menuValidator = mock(MenuValidator.class);
         printStream = mock(PrintStream.class);
-        userInput = mock(UserInput.class);
         application = new Application(menu, menuValidator, printStream);
     }
 
@@ -40,10 +38,11 @@ public class ApplicationTest {
     }
 
     @Test
-    public void shouldValidateUserMenuOptionSelectionWhenCalled() throws IOException {
+    public void shouldValidateUserMenuOptionSelectionWhenCalled() {
         application.start();
 
         verify(menuValidator).validate();
     }
+
 }
 

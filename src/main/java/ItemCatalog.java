@@ -26,6 +26,7 @@ public class ItemCatalog {
         }
     }
 
+    //find
     public void listItemsInASpecificCategory() {
         printStream.println("Please Enter A Category Of Your Choice");
 
