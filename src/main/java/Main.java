@@ -29,10 +29,12 @@ public class Main {
         Command browseAvailableCategoriesCommand = new BrowseAvailableCategoriesCommand(itemCatalog);
         Command browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog);
         Command viewBasketCommand = new ViewBasketCommand(basket);
+        Command addBasketCommand = new AddItemToBasketCommand(basket);
         groceryCommands.put("Browse Available Items", browseAvailableItemsCommand);
         groceryCommands.put("Browse Available Categories", browseAvailableCategoriesCommand);
         groceryCommands.put("Browse Available Items In A Category", browseAvailableItemsInACategoryCommand);
         groceryCommands.put("View Basket", viewBasketCommand);
+        groceryCommands.put("Add Item To Basket", addBasketCommand);
         MenuValidator menuValidator = new MenuValidator(printStream, userInput, groceryCommands);
         Application application = new Application(menu, menuValidator, printStream);
 

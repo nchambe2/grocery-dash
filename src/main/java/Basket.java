@@ -11,4 +11,8 @@ public class Basket {
     public void display() {
         printStream.println("This basket is empty");
     }
+
+    public void add() {
+
+    }
 }
