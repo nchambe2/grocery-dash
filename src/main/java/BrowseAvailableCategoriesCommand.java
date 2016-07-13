@@ -1,19 +1,25 @@
 import java.io.PrintStream;
 
 public class BrowseAvailableCategoriesCommand implements Command{
-    private final ItemCatalog itemCatalog;
+    private final GroceryCatalog groceryCatalog;
     private final PrintStream printStream;
 
-    public BrowseAvailableCategoriesCommand(ItemCatalog itemCatalog, PrintStream printStream) {
+    public BrowseAvailableCategoriesCommand(GroceryCatalog groceryCatalog, PrintStream printStream) {
 
-        this.itemCatalog = itemCatalog;
+        this.groceryCatalog = groceryCatalog;
         this.printStream = printStream;
     }
 
     @Override
     public void run() {
-        for(Category category : itemCatalog.getAvailableCategories()) {
-            printStream.println(category.getTitle());
+        String categoriesToPrint = "";
+
+        for(String category : groceryCatalog.getAvailableCategories()) {
+            categoriesToPrint += category + "\n";
         }
+
+        printStream.println(categoriesToPrint);
+        //builds a string
+        //then print it
     }
 }

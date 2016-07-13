@@ -1,10 +1,10 @@
 public class Item {
     private final String title;
     private final String description;
-    private final Category category;
+    private final String category;
     private final String price;
 
-    public Item(String title, String description, Category category, String price) {
+    public Item(String title, String description, String category, String price) {
         this.title = title;
         this.description = description;
         this.category = category;
@@ -12,7 +12,7 @@ public class Item {
     }
 
     public String details() {
-        return String.join(" | " , title, description, category.getTitle(), price);
+        return String.join(" | " , title, description, category, price);
     }
 
 }

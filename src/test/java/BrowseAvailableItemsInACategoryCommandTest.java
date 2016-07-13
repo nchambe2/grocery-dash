@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 
 public class BrowseAvailableItemsInACategoryCommandTest {
 
-    private ItemCatalog itemCatalog;
+    private GroceryCatalog groceryCatalog;
     private BrowseAvailableItemsInACategoryCommand browseAvailableItemsInACategoryCommand;
     private PrintStream printStream;
     private UserInput userInput;
@@ -21,13 +21,13 @@ public class BrowseAvailableItemsInACategoryCommandTest {
 
     @Before
     public void setUp() {
-        itemCatalog = mock(ItemCatalog.class);
+        groceryCatalog = mock(GroceryCatalog.class);
         printStream = mock(PrintStream.class);
         userInput = mock(UserInput.class);
         itemOne = mock(Item.class);
         itemTwo = mock(Item.class);
         availableGroceryItems = new ArrayList<>();
-        browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog, printStream, userInput);
+        browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(groceryCatalog, printStream, userInput);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class BrowseAvailableItemsInACategoryCommandTest {
     @Test
     public void shouldListASingleItemWhenThereIsOneItemAvailablInACategory() {
         when(userInput.getInput()).thenReturn("Category");
-        when(itemCatalog.getAvailableGroceryItems()).thenReturn(availableGroceryItems);
+        when(groceryCatalog.getAvailableGroceryItems()).thenReturn(availableGroceryItems);
         when(itemOne.details()).thenReturn("Category");
         availableGroceryItems.add(itemOne);
 
@@ -59,7 +59,7 @@ public class BrowseAvailableItemsInACategoryCommandTest {
     @Test
     public void shouldListTwoItemsWhenThereAreMultipleitemsAvailableInACategory() {
         when(userInput.getInput()).thenReturn("Category");
-        when(itemCatalog.getAvailableGroceryItems()).thenReturn(availableGroceryItems);
+        when(groceryCatalog.getAvailableGroceryItems()).thenReturn(availableGroceryItems);
         when(itemOne.details()).thenReturn("Category");
         when(itemTwo.details()).thenReturn("Category");
         availableGroceryItems.add(itemOne);

@@ -2,13 +2,13 @@ import java.io.PrintStream;
 
 public class BrowseAvailableItemsInACategoryCommand implements Command {
 
-    private final ItemCatalog itemCatalog;
+    private final GroceryCatalog groceryCatalog;
     private final PrintStream printStream;
     private final UserInput userInput;
 
-    public BrowseAvailableItemsInACategoryCommand(ItemCatalog itemCatalog, PrintStream printStream, UserInput userInput) {
+    public BrowseAvailableItemsInACategoryCommand(GroceryCatalog groceryCatalog, PrintStream printStream, UserInput userInput) {
 
-        this.itemCatalog = itemCatalog;
+        this.groceryCatalog = groceryCatalog;
         this.printStream = printStream;
         this.userInput = userInput;
     }
@@ -19,7 +19,7 @@ public class BrowseAvailableItemsInACategoryCommand implements Command {
 
         String selectedCategory = userInput.getInput();
 
-        for(Item item : itemCatalog.getAvailableGroceryItems()) {
+        for(Item item : groceryCatalog.getAvailableGroceryItems()) {
             if(isItemInSelectedCategory(selectedCategory, item)) {
                 printStream.println(item.details());
             }

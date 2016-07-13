@@ -8,16 +8,17 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class ItemCatalogTest {
+public class GroceryCatalogTest {
 
     private Collection<Item> availableGroceryItems;
-    private ItemCatalog itemCatalog;
+    private GroceryCatalog groceryCatalog;
     private Item itemOne;
-    private Collection<Category> availableCategories;
-    private Category categoryOne;
+    private Collection<String> availableCategories;
+    private String categoryOne;
     private Item itemTWo;
-    private Category categoryTwo;
+    private String categoryTwo;
 
     @Before
     public void setUp () {
@@ -25,51 +26,56 @@ public class ItemCatalogTest {
         itemOne = mock(Item.class);
         itemTWo = mock(Item.class);
         availableCategories = new ArrayList<>();
-        categoryOne = mock(Category.class);
-        categoryTwo = mock(Category.class);
-        itemCatalog = new ItemCatalog(availableGroceryItems, availableCategories);
+        categoryOne = "Category One";
+        categoryTwo = "Category Two";
+        groceryCatalog = new GroceryCatalog(availableGroceryItems, availableCategories);
     }
 
     @Test
     public void shouldReturnAvailableGroceryItemsWhenCalled() {
         availableGroceryItems.add(itemOne);
 
-        assertThat(itemCatalog.getAvailableGroceryItems(), is(availableGroceryItems));
+        assertThat(groceryCatalog.getAvailableGroceryItems(), is(availableGroceryItems));
     }
 
     @Test
     public void shouldReturnAvailableCategoriesWhenCalled() {
         availableCategories.add(categoryOne);
 
-        assertThat(itemCatalog.getAvailableCategories(), is(availableCategories));
+        assertThat(groceryCatalog.getAvailableCategories(), is(availableCategories));
     }
 
     @Test
-    public void shouldReturnTrueIfItemToBeFoundIsInAvailableGroceryList() {
+    public void shouldReturnTrueWhenItemTitleIsAnAvailableGroceryItem() {
+        when(itemOne.details()).thenReturn("Item Title");
+
         availableGroceryItems.add(itemOne);
 
-       //assertThat(itemCatalog.findItem(itemOne), is(true));
+       assertThat(groceryCatalog.findItem("Item Title"), is(true));
     }
 
     @Test
-    public void shouldReturnFalseIfItemToBeFoundIsNotInAvailableGroceryList() {
+    public void shouldReturnFalseWhenItemTitleIsNotAnAvailableGroceryItem() {
+        when(itemOne.details()).thenReturn("Item Title");
+
         availableGroceryItems.add(itemOne);
 
-       // assertThat(itemCatalog.findItem(itemTWo), is(false));
+       assertThat(groceryCatalog.findItem("Wrong Item Title"), is(false));
     }
 
     @Test
     public void shouldReturnTrueIfCategoryToBeFoundIsAnAvailableCategory() {
         availableCategories.add(categoryOne);
 
-        assertThat(itemCatalog.findCategory(categoryOne), is(true));
+        assertThat(groceryCatalog.findCategory("Category Title"), is(true));
     }
 
     @Test
     public void shouldReturnFalseIfCategoryToBeFoundIsNotAnAvailableCategory() {
+
         availableCategories.add(categoryOne);
 
-        assertThat((itemCatalog.findCategory(categoryTwo)), is(false));
+        assertThat((groceryCatalog.findCategory("Wrong Category Title")), is(false));
     }
 
 

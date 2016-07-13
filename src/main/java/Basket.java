@@ -1,9 +1,10 @@
 import java.io.PrintStream;
+import java.util.Collection;
 
 public class Basket {
     private final PrintStream printStream;
 
-    public Basket(PrintStream printStream) {
+    public Basket(PrintStream printStream, GroceryCatalog groceryCatalog, Collection<Item> itemsToBePurchased) {
 
         this.printStream = printStream;
     }
@@ -12,7 +13,7 @@ public class Basket {
         printStream.println("This basket is empty");
     }
 
-    public void add() {
+    public void add(String itemToPlaceInBasket) {
 
     }
 

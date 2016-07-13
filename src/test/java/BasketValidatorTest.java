@@ -12,15 +12,15 @@ public class BasketValidatorTest {
     private UserInput userInput;
     private BasketValidator basketValidator;
     private Basket basket;
-    private ItemCatalog itemCatalog;
+    private GroceryCatalog groceryCatalog;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         userInput = mock(UserInput.class);
         basket = mock(Basket.class);
-        itemCatalog = mock(ItemCatalog.class);
-        basketValidator = new BasketValidator(printStream, userInput, basket, itemCatalog);
+        groceryCatalog = mock(GroceryCatalog.class);
+        basketValidator = new BasketValidator(printStream, userInput, basket, groceryCatalog);
     }
 
     @Test
@@ -40,17 +40,17 @@ public class BasketValidatorTest {
     @Test
     public void shouldAddItemToBasketWhenItemTitleIsInTheAvailableGroceryCatalog() {
         when(userInput.getInput()).thenReturn("Available Item");
-        when(itemCatalog.findItem("Available Item")).thenReturn(true);
+        when(groceryCatalog.findItem("Available Item")).thenReturn(true);
 
         basketValidator.validate();
 
-        verify(basket).add();
+        //verify(basket).add(itemToPlaceInBasket);
     }
 
     @Test
     public void shouldDisplayItemIsNotAvailableMessageWhenItemTitleIsNotInTheAvailableGroceryCatalog() {
         when(userInput.getInput()).thenReturn("Available Item");
-        when(itemCatalog.findItem("Available Item")).thenReturn(false);
+        when(groceryCatalog.findItem("Available Item")).thenReturn(false);
 
         basketValidator.validate();
 
