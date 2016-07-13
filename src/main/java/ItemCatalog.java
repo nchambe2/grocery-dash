@@ -39,6 +39,6 @@ public class ItemCatalog {
     }
 
     private boolean isItemInSelectedCategory(String selectedCategory, Item item) {
-        return item.getCategoryName().equals(selectedCategory);
+          return item.details().contains(selectedCategory);
     }
 }

@@ -86,13 +86,28 @@ public class ItemCatalogTest {
     @Test
     public void shouldDisplayASingleItemInACategoryWhenThereIsOnlyOneAvailableItemInACategory() throws IOException {
         when(userInput.getInput()).thenReturn("Category");
-        when(itemOne.getCategoryName()).thenReturn("Category");
+        when(itemOne.details()).thenReturn("Title | Description | Category | $0.00");
         availableCategories.add(categoryOne);
         availableGroceryItems.add(itemOne);
 
         itemCatalog.listItemsInASpecificCategory();
 
-        verify(itemOne).details();
+        verify(printStream).println(contains("Title | Description"));
+    }
+
+    //problematic setup
+    @Test
+    public void shouldDisplayTwoItemsInACategoryWhenThereIsAreMultiplAvailableItemsInACategory() throws IOException {
+        when(userInput.getInput()).thenReturn("Category");
+        when(itemOne.details()).thenReturn("Title | Description | Category | $0.00");
+        when(itemTwo.details()).thenReturn("Title Two | Description Two | Category Two | $0.00");
+        availableCategories.add(categoryOne);
+        availableGroceryItems.add(itemOne);
+        availableGroceryItems.add(itemTwo);
+
+        itemCatalog.listItemsInASpecificCategory();
+
+        verify(printStream).println(contains("Title Two | Description Two"));
     }
 
 }
