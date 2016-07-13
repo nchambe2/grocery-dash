@@ -24,12 +24,15 @@ public class Main {
         Map<String, Command> groceryCommands = new HashMap<>();
         ItemCatalog itemCatalog = new ItemCatalog(printStream, userInput, availableGroceryItems, availableCategories);
         Menu menu = new Menu(printStream, groceryCommands);
+        Basket basket = new Basket(printStream);
         Command browseAvailableItemsCommand = new BrowseAvailableItemsCommand(itemCatalog);
         Command browseAvailableCategoriesCommand = new BrowseAvailableCategoriesCommand(itemCatalog);
         Command browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog);
+        Command viewBasketCommand = new ViewBasketCommand(basket);
         groceryCommands.put("Browse Available Items", browseAvailableItemsCommand);
         groceryCommands.put("Browse Available Categories", browseAvailableCategoriesCommand);
         groceryCommands.put("Browse Available Items In A Category", browseAvailableItemsInACategoryCommand);
+        groceryCommands.put("View Basket", viewBasketCommand);
         MenuValidator menuValidator = new MenuValidator(printStream, userInput, groceryCommands);
         Application application = new Application(menu, menuValidator, printStream);
 
