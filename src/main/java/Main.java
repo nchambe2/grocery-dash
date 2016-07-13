@@ -25,11 +25,12 @@ public class Main {
         ItemCatalog itemCatalog = new ItemCatalog(availableGroceryItems, availableCategories);
         Menu menu = new Menu(printStream, groceryCommands);
         Basket basket = new Basket(printStream);
+        BasketValidator basketValidator = new BasketValidator(printStream, userInput, basket, itemCatalog);
         Command browseAvailableItemsCommand = new BrowseAvailableItemsCommand(itemCatalog, printStream);
         Command browseAvailableCategoriesCommand = new BrowseAvailableCategoriesCommand(itemCatalog, printStream);
         Command browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog, printStream, userInput);
         Command viewBasketCommand = new ViewBasketCommand(basket);
-        Command addBasketCommand = new AddItemToBasketCommand(basket);
+        Command addBasketCommand = new AddItemToBasketCommand(basketValidator);
         groceryCommands.put("Browse Available Items", browseAvailableItemsCommand);
         groceryCommands.put("Browse Available Categories", browseAvailableCategoriesCommand);
         groceryCommands.put("Browse Available Items In A Category", browseAvailableItemsInACategoryCommand);

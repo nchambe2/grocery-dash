@@ -16,4 +16,18 @@ public class ItemCatalog {
     public Collection<Category> getAvailableCategories() {
         return availableCategories;
     }
+
+    public Boolean findItem(String itemTitle) {
+        Boolean isItemContainedInCatalog = false;
+
+        for(Item item : availableGroceryItems) {
+            isItemContainedInCatalog =  item.details().contains(itemTitle);
+        }
+
+        return isItemContainedInCatalog;
+    }
+
+    public Boolean findCategory(Category category) {
+        return availableCategories.contains(category);
+    }
 }

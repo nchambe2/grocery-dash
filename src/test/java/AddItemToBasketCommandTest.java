@@ -1,16 +1,19 @@
 import org.junit.Test;
 
+import java.io.PrintStream;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class AddItemToBasketCommandTest {
+
     @Test
-    public void shouldAddItemToBasketWhenRun() {
-        Basket basket = mock(Basket.class);
-        AddItemToBasketCommand addItemToBasketCommand = new AddItemToBasketCommand(basket);
+    public void shouldValidateItemBeingAdddedToTheBaskedWhenRun() {
+        BasketValidator basketValidator = mock(BasketValidator.class);
+        AddItemToBasketCommand addItemToBasketCommand = new AddItemToBasketCommand(basketValidator);
 
         addItemToBasketCommand.run();
 
-        verify(basket).add();
+        verify(basketValidator).validate();
     }
 }

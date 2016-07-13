@@ -15,4 +15,10 @@ public class Basket {
     public void add() {
 
     }
+
+    //prompt a user to enter a item
+    //get user input
+    //validate user input
+    //add the item to a itemsToBePurchased collection
+    //remove from available collection
 }
