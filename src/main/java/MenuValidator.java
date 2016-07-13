@@ -13,7 +13,6 @@ public class MenuValidator {
         this.groceryCommands = groceryCommands;
     }
 
-
     public void validate() {
         String menuSelection = userInput.getInput();
 

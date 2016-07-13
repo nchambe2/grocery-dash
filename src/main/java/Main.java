@@ -21,12 +21,12 @@ public class Main {
         Item tazoPassionTea = new Item("Tazo Passion Tea", "Flowery Tea", tea, "$4.99");
         availableGroceryItems.add(oscarMeyerHotDog);
         availableGroceryItems.add(tazoPassionTea);
+        Map<String, Command> groceryCommands = new HashMap<>();
         ItemCatalog itemCatalog = new ItemCatalog(printStream, userInput, availableGroceryItems, availableCategories);
-        Menu menu = new Menu(printStream);
+        Menu menu = new Menu(printStream, groceryCommands);
         Command browseAvailableItemsCommand = new BrowseAvailableItemsCommand(itemCatalog);
         Command browseAvailableCategoriesCommand = new BrowseAvailableCategoriesCommand(itemCatalog);
         Command browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog);
-        Map<String, Command> groceryCommands = new HashMap<>();
         groceryCommands.put("Browse Available Items", browseAvailableItemsCommand);
         groceryCommands.put("Browse Available Categories", browseAvailableCategoriesCommand);
         groceryCommands.put("Browse Available Items In A Category", browseAvailableItemsInACategoryCommand);
