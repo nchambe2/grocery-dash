@@ -15,42 +15,37 @@ public class MenuTest {
     private PrintStream printStream;
     private Menu menu;
     private Map<String, Command> groceryCommands;
-    private Command browseAvailableItemsCommand;
-    private Command browseAvailableCategoriesCommand;
+    private Command commandOne;
+    private Command commandTwo;
     private Command browseAvailableItemsInACategory;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        browseAvailableItemsCommand = mock(Command.class);
-        browseAvailableCategoriesCommand = mock(Command.class);
-        browseAvailableItemsInACategory = mock(Command.class);
+        commandOne = mock(Command.class);
+        commandTwo = mock(Command.class);
         groceryCommands = new HashMap<>();
-        groceryCommands.put("Browse Available Items", browseAvailableItemsCommand);
-        groceryCommands.put("Browse Available Categories", browseAvailableCategoriesCommand);
-        groceryCommands.put("Browse Available Items In A Category", browseAvailableItemsInACategory);
         menu = new Menu(printStream, groceryCommands);
     }
 
     @Test
-    public void shouldDisplayBrowseAvailableItemsAsAnOptionWhenMenuIsDisplayed() {
+    public void shouldDisplayASingleCommandWhenThereIsOnlyOneGroceryCommand() {
+        groceryCommands.put("Command One", commandOne);
+
         menu.display();
 
-        verify(printStream, times(2)).println(contains("Browse Available Items"));
+        verify(printStream, times(1)).println(contains("Command One"));
     }
 
     @Test
-    public void shouldDisplayBrowseAvailableCategoriesAsAnOptionWhenMenuIsDisplayed() {
+    public void shouldDisplayTwoCommandsWhenThereAreMultipleCommands() {
+        groceryCommands.put("Command One", commandOne);
+        groceryCommands.put("Command Two", commandTwo);
+
         menu.display();
 
-        verify(printStream).println(contains("Browse Available Categories"));
-    }
-
-    @Test
-    public void shouldDisplayBrowseAvailableItemsInACategoryWhenMenuIsDisplayed() {
-        menu.display();
-
-        verify(printStream).println(contains("Browse Available Items In A Category"));
+        verify(printStream).println(contains("Command One"));
+        verify(printStream).println(contains("Command Two"));
     }
 
 }

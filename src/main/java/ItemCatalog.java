@@ -26,16 +26,19 @@ public class ItemCatalog {
         }
     }
 
-    //find
     public void listItemsInASpecificCategory() {
         printStream.println("Please Enter A Category Of Your Choice");
 
         String selectedCategory = userInput.getInput();
 
        for(Item item :availableGroceryItems) {
-           if(item.getCategoryName().equals(selectedCategory)) {
+           if(isItemInSelectedCategory(selectedCategory, item)) {
                printStream.println(item.details());
            }
        }
+    }
+
+    private boolean isItemInSelectedCategory(String selectedCategory, Item item) {
+        return item.getCategoryName().equals(selectedCategory);
     }
 }
