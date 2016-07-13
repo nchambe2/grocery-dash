@@ -22,12 +22,12 @@ public class Main {
         availableGroceryItems.add(oscarMeyerHotDog);
         availableGroceryItems.add(tazoPassionTea);
         Map<String, Command> groceryCommands = new HashMap<>();
-        ItemCatalog itemCatalog = new ItemCatalog(printStream, userInput, availableGroceryItems, availableCategories);
+        ItemCatalog itemCatalog = new ItemCatalog(availableGroceryItems, availableCategories);
         Menu menu = new Menu(printStream, groceryCommands);
         Basket basket = new Basket(printStream);
-        Command browseAvailableItemsCommand = new BrowseAvailableItemsCommand(itemCatalog);
-        Command browseAvailableCategoriesCommand = new BrowseAvailableCategoriesCommand(itemCatalog);
-        Command browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog);
+        Command browseAvailableItemsCommand = new BrowseAvailableItemsCommand(itemCatalog, printStream);
+        Command browseAvailableCategoriesCommand = new BrowseAvailableCategoriesCommand(itemCatalog, printStream);
+        Command browseAvailableItemsInACategoryCommand = new BrowseAvailableItemsInACategoryCommand(itemCatalog, printStream, userInput);
         Command viewBasketCommand = new ViewBasketCommand(basket);
         Command addBasketCommand = new AddItemToBasketCommand(basket);
         groceryCommands.put("Browse Available Items", browseAvailableItemsCommand);
