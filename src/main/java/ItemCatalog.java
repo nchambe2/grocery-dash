@@ -41,4 +41,12 @@ public class ItemCatalog {
     private boolean isItemInSelectedCategory(String selectedCategory, Item item) {
           return item.details().contains(selectedCategory);
     }
+
+    public Collection<Item> getAvailableGroceryItems() {
+        return availableGroceryItems;
+    }
+
+    public Collection<Category> getAvailableCategories() {
+        return availableCategories;
+    }
 }

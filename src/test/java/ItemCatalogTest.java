@@ -97,7 +97,6 @@ public class ItemCatalogTest {
         verify(printStream).println(contains("Title | Description"));
     }
 
-    //problematic setup
     @Test
     public void shouldDisplayTwoItemsInACategoryWhenThereIsAreMultiplAvailableItemsInACategory() throws IOException {
         when(userInput.getInput()).thenReturn("Category");
@@ -110,6 +109,20 @@ public class ItemCatalogTest {
         itemCatalog.listItemsInASpecificCategory();
 
         verify(printStream).println(contains("Title Two | Description Two"));
+    }
+
+    @Test
+    public void shouldReturnAvailableGroceryItemsWhenCalled() {
+        availableGroceryItems.add(itemOne);
+
+        assertThat(itemCatalog.getAvailableGroceryItems(), is(availableGroceryItems));
+    }
+
+    @Test
+    public void shouldReturnAvailableCategoriesWhenCalled() {
+        availableCategories.add(categoryOne);
+
+        assertThat(itemCatalog.getAvailableCategories(), is(availableCategories));
     }
 
 }
