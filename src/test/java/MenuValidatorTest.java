@@ -10,7 +10,6 @@ import static org.mockito.Mockito.*;
 
 public class MenuValidatorTest {
 
-    private GroceryCatalog groceryCatalog;
     private PrintStream printStream;
     private MenuValidator menuValidator;
     private UserInput userInput;
@@ -20,7 +19,6 @@ public class MenuValidatorTest {
 
     @Before
     public void setUp() {
-        groceryCatalog = mock(GroceryCatalog.class);
         printStream = mock(PrintStream.class);
         userInput = mock(UserInput.class);
         browseItemsCommand = mock(Command.class);
@@ -31,20 +29,18 @@ public class MenuValidatorTest {
 
     @Test
     public void shouldRunCommandWhenValidGroceryCommand() {
-        when(userInput.getInput()).thenReturn("Amazing Command");
         groceryCommands.put("Amazing Command", browseItemsCommand);
 
-        menuValidator.validate();
+        menuValidator.validate("Amazing Command");
 
         verify(browseItemsCommand).run();
     }
 
     @Test
     public void shouldDisplayInvalidSelectionMessageWhenUserInputIsNotAGroceryCommand() {
-        when(userInput.getInput()).thenReturn("Invalid Command");
         groceryCommands.put("Browse Available Items", browseItemsCommand);
 
-        menuValidator.validate();
+        menuValidator.validate("Invalid Command");
 
         verify(printStream).println(contains("Invalid Selection"));
     }

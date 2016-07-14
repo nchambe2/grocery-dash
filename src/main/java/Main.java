@@ -37,7 +37,7 @@ public class Main {
         groceryCommands.put("View Basket", viewBasketCommand);
         groceryCommands.put("Add Item To Basket", addBasketCommand);
         MenuValidator menuValidator = new MenuValidator(printStream, userInput, groceryCommands);
-        Application application = new Application(menu, menuValidator, printStream);
+        Application application = new Application(menu, menuValidator, printStream, userInput);
 
         application.start();
 

@@ -13,9 +13,7 @@ public class MenuValidator {
         this.groceryCommands = groceryCommands;
     }
 
-    public void validate() {
-        String menuSelection = userInput.getInput();
-
+    public void validate(String menuSelection) {
         if(groceryCommands.containsKey(menuSelection)) {
             groceryCommands.get(menuSelection).run();
         } else {
