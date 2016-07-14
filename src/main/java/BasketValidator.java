@@ -18,16 +18,22 @@ public class BasketValidator {
     //should return only a valid item
     //valid item or not
     //doesn't have to have basket
+    //groceryCatalog.shop
+    //prompting
+    //geting input
+    //if avaialbe
+    //remove item from avialabe grocery list
+    //add item to basket
     public void validate() {
         printStream.println("Enter the item you would like to add to your basket");
 
         String itemToPlaceInBasket = userInput.getInput();
 
-        if(groceryCatalog.findItem(itemToPlaceInBasket)) {
-            basket.add(itemToPlaceInBasket);
-        } else {
-            printStream.println("Item Title Is Not In Stock");
-        }
+//        if(groceryCatalog.isAvailable(itemToPlaceInBasket)) {
+//            basket.add(itemToPlaceInBasket);
+//        } else {
+//            printStream.println("Item Title Is Not In Stock");
+//        }
 
     }
 }

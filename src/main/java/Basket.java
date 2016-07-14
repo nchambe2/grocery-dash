@@ -4,7 +4,7 @@ import java.util.Collection;
 public class Basket {
     private final PrintStream printStream;
 
-    public Basket(PrintStream printStream, GroceryCatalog groceryCatalog, Collection<Item> itemsToBePurchased) {
+    public Basket(PrintStream printStream, GroceryCatalog groceryCatalog, Collection<String> itemsToBePurchased) {
 
         this.printStream = printStream;
     }

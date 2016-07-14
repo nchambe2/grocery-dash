@@ -40,7 +40,7 @@ public class BasketValidatorTest {
     @Test
     public void shouldAddItemToBasketWhenItemTitleIsInTheAvailableGroceryCatalog() {
         when(userInput.getInput()).thenReturn("Available Item");
-        when(groceryCatalog.findItem("Available Item")).thenReturn(true);
+       // when(groceryCatalog.isAvailable("Available Item")).thenReturn(true);
 
         basketValidator.validate();
 
@@ -50,7 +50,7 @@ public class BasketValidatorTest {
     @Test
     public void shouldDisplayItemIsNotAvailableMessageWhenItemTitleIsNotInTheAvailableGroceryCatalog() {
         when(userInput.getInput()).thenReturn("Available Item");
-        when(groceryCatalog.findItem("Available Item")).thenReturn(false);
+        //when(groceryCatalog.isAvailable("Available Item")).thenReturn(false);
 
         basketValidator.validate();
 

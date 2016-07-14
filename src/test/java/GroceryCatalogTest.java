@@ -1,82 +1,124 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class GroceryCatalogTest {
 
-    private Collection<Item> availableGroceryItems;
+    private Collection<String> availableGroceryItems;
     private GroceryCatalog groceryCatalog;
-    private Item itemOne;
+    private String itemOne;
     private Collection<String> availableCategories;
     private String categoryOne;
-    private Item itemTWo;
+    private String itemTwo;
     private String categoryTwo;
+    private PrintStream printStream;
 
     @Before
     public void setUp () {
         availableGroceryItems = new ArrayList<>();
-        itemOne = mock(Item.class);
-        itemTWo = mock(Item.class);
+        itemOne = "Title | Description | Category One | Price";
+        itemTwo = "Title Two | Description Two | Category One | Price Two";
         availableCategories = new ArrayList<>();
         categoryOne = "Category One";
         categoryTwo = "Category Two";
-        groceryCatalog = new GroceryCatalog(availableGroceryItems, availableCategories);
+        printStream = mock(PrintStream.class);
+        groceryCatalog = new GroceryCatalog(availableGroceryItems, availableCategories, printStream);
     }
 
     @Test
-    public void shouldReturnAvailableGroceryItemsWhenCalled() {
+    public void shouldReturnTrueWhenItemIsAvailable() {
         availableGroceryItems.add(itemOne);
 
-        assertThat(groceryCatalog.getAvailableGroceryItems(), is(availableGroceryItems));
+       assertThat(groceryCatalog.isAvailable(availableGroceryItems, "Title"), is(true));
     }
 
     @Test
-    public void shouldReturnAvailableCategoriesWhenCalled() {
-        availableCategories.add(categoryOne);
-
-        assertThat(groceryCatalog.getAvailableCategories(), is(availableCategories));
-    }
-
-    @Test
-    public void shouldReturnTrueWhenItemTitleIsAnAvailableGroceryItem() {
-        when(itemOne.details()).thenReturn("Item Title");
-
+    public void shouldReturnFalseWhenItemIsNotAvailable() {
         availableGroceryItems.add(itemOne);
 
-       assertThat(groceryCatalog.findItem("Item Title"), is(true));
+       assertThat(groceryCatalog.isAvailable(availableGroceryItems, "Wrong Item Title"), is(false));
     }
 
     @Test
-    public void shouldReturnFalseWhenItemTitleIsNotAnAvailableGroceryItem() {
-        when(itemOne.details()).thenReturn("Item Title");
+    public void shouldReturnTrueIfCategoryIsAvailable() {
+        availableCategories.add(categoryOne);
 
+        assertThat(groceryCatalog.isAvailable(availableCategories, "Category One"), is(true));
+    }
+
+    @Test
+    public void shouldReturnFalseIfCategoryIsNotAnAvailable() {
+        availableCategories.add(categoryOne);
+
+       assertThat((groceryCatalog.isAvailable(availableCategories, "Wrong Category Title")), is(false));
+    }
+
+    @Test
+    public void shouldListASingleItemWhenOneItemIsAvailable() {
         availableGroceryItems.add(itemOne);
 
-       assertThat(groceryCatalog.findItem("Wrong Item Title"), is(false));
+        groceryCatalog.list(availableGroceryItems);
+
+        verify(printStream).println(contains("Title | Description | Category One | Price"));
     }
 
     @Test
-    public void shouldReturnTrueIfCategoryToBeFoundIsAnAvailableCategory() {
-        availableCategories.add(categoryOne);
+    public void shouldListTwoItemsWhenAreMultipleItemsAvailable() {
+        availableGroceryItems.add(itemOne);
+        availableGroceryItems.add(itemTwo);
 
-        assertThat(groceryCatalog.findCategory("Category Title"), is(true));
+        groceryCatalog.list(availableGroceryItems);
+
+        verify(printStream).println(contains("Title | Description | Category One | Price\nTitle Two | Description Two | Category One | Price Two"));
     }
 
     @Test
-    public void shouldReturnFalseIfCategoryToBeFoundIsNotAnAvailableCategory() {
-
+    public void shouldListASingleCategoryWhenOneCategoryIsAvailable() {
         availableCategories.add(categoryOne);
 
-        assertThat((groceryCatalog.findCategory("Wrong Category Title")), is(false));
+        groceryCatalog.list(availableCategories);
+
+        verify(printStream).println(contains("Category One"));
     }
+
+    @Test
+    public void shouldListTwoCategoriesWhenThereAreMultipleCategoriesAvailable() {
+        availableCategories.add(categoryOne);
+        availableCategories.add(categoryTwo);
+
+        groceryCatalog.list(availableCategories);
+
+        verify(printStream).println(contains("Category One\nCategory Two"));
+    }
+
+    @Test
+    public void shouldListASingleItemInACategoryWhenOneItemIsAvailable() {
+        availableGroceryItems.add(itemOne);
+
+        groceryCatalog.listItemsIn("Category One");
+
+        verify(printStream).println(contains("Title | Description | Category One | "));
+    }
+
+    @Test
+    public void shouldListTwoItemsInACategoryWheMultipleItemsAreAvailable() {
+        availableGroceryItems.add(itemOne);
+        availableGroceryItems.add(itemTwo);
+
+        groceryCatalog.listItemsIn("Category One");
+
+        verify(printStream).println("Title | Description | Category One | Price\nTitle Two | Description Two | Category One | Price Two\n");
+    }
+
 
 
 }

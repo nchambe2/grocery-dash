@@ -14,7 +14,7 @@ public class BasketTest {
     private GroceryCatalog groceryCatalog;
     private PrintStream printStream;
     private Basket basket;
-    private Collection<Item> itemsToBePurchased;
+    private Collection<String> itemsToBePurchased;
 
     @Before
     public void setUp() {
