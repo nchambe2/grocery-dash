@@ -9,11 +9,11 @@ public class AddItemToBasketCommandTest {
 
     @Test
     public void shouldValidateItemBeingAdddedToTheBaskedWhenRun() {
-        BasketValidator basketValidator = mock(BasketValidator.class);
-        AddItemToBasketCommand addItemToBasketCommand = new AddItemToBasketCommand(basketValidator);
+        GroceryCatalog groceryCatalog = mock(GroceryCatalog.class);
+        AddItemToBasketCommand addItemToBasketCommand = new AddItemToBasketCommand(groceryCatalog);
 
         addItemToBasketCommand.run();
 
-        verify(basketValidator).validate();
+        verify(groceryCatalog).shop();
     }
 }

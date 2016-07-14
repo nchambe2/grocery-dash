@@ -1,22 +1,22 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
-public class BrowseAvailableItemsCommandTest {
+public class ViewAvailableItemsCommandTest {
 
     private GroceryCatalog groceryCatalog;
     private ViewAvailableItemsCommand viewAvailableItemsCommand;
-    private Collection<String> availableGroceryItems;
+    private Map<String, String> availableGroceryItems;
 
     @Before
     public void setUp() {
-        availableGroceryItems = new ArrayList();
+        availableGroceryItems = new HashMap<>();
         groceryCatalog = mock(GroceryCatalog.class);
         viewAvailableItemsCommand = new ViewAvailableItemsCommand(availableGroceryItems, groceryCatalog);
     }

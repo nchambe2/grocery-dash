@@ -5,13 +5,14 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class BasketTest {
 
-    private GroceryCatalog groceryCatalog;
     private PrintStream printStream;
     private Basket basket;
     private Collection<String> itemsToBePurchased;
@@ -19,9 +20,8 @@ public class BasketTest {
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        groceryCatalog = mock(GroceryCatalog.class);
         itemsToBePurchased = new ArrayList<>();
-        basket = new Basket(printStream, groceryCatalog, itemsToBePurchased);
+        basket = new Basket(printStream, itemsToBePurchased);
     }
 
     @Test
@@ -35,6 +35,6 @@ public class BasketTest {
     public void shouldRemoveItemFromAvailableGroceryItemsWhenAddingAnItemToABasket() {
         basket.add("Juice");
 
-        //verify(groceryCatalog).remove()
+        assertThat(itemsToBePurchased.size(), is(1));
     }
 }

@@ -3,10 +3,12 @@ import java.util.Collection;
 
 public class Basket {
     private final PrintStream printStream;
+    private final Collection<String> itemsToBePurchased;
 
-    public Basket(PrintStream printStream, GroceryCatalog groceryCatalog, Collection<String> itemsToBePurchased) {
+    public Basket(PrintStream printStream, Collection<String> itemsToBePurchased) {
 
         this.printStream = printStream;
+        this.itemsToBePurchased = itemsToBePurchased;
     }
 
     public void display() {
@@ -14,12 +16,11 @@ public class Basket {
     }
 
     public void add(String itemToPlaceInBasket) {
-
+        itemsToBePurchased.add(itemToPlaceInBasket);
     }
 
-    //prompt a user to enter a item
-    //get user input
-    //validate user input
-    //add the item to a itemsToBePurchased collection
-    //remove from available collection
+    //getting valid input
+    //should return only a valid item
+    //valid item or not
+    //doesn't have to have basket
 }

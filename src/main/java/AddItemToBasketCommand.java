@@ -1,12 +1,12 @@
 public class AddItemToBasketCommand implements Command{
-    private final BasketValidator basketValidator;
+    private final GroceryCatalog groceryCatalog;
 
-    public AddItemToBasketCommand(BasketValidator basketValidator) {
-        this.basketValidator = basketValidator;
+    public AddItemToBasketCommand(GroceryCatalog groceryCatalog) {
+        this.groceryCatalog = groceryCatalog;
     }
 
     @Override
     public void run() {
-        basketValidator.validate();
+        groceryCatalog.shop();
     }
 }

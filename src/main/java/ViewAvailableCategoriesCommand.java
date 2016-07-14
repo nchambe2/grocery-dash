@@ -1,10 +1,10 @@
-import java.util.Collection;
+import java.util.Map;
 
 public class ViewAvailableCategoriesCommand implements Command{
     private final GroceryCatalog groceryCatalog;
-    private final Collection<String> availableCategories;
+    private final Map<String, String> availableCategories;
 
-    public ViewAvailableCategoriesCommand(GroceryCatalog groceryCatalog, Collection<String> availableCategories) {
+    public ViewAvailableCategoriesCommand(GroceryCatalog groceryCatalog, Map<String, String> availableCategories) {
 
         this.groceryCatalog = groceryCatalog;
         this.availableCategories = availableCategories;
