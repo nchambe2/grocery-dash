@@ -19,9 +19,11 @@ public class Main {
         availableCategories.put("2", tea);
         String oscarMeyerHotDog = String.join(" | ", "Oscar Meyer Hot Dog", "Very Tasty Hot Dog", meat, "$3.99");
         String tazoPassionTea = String.join(" | ", "Tazo Passion Tea", "Flowery Tea", tea, "$4.99");
+        String tazoChaiTea = String.join(" | ", "Tazo Chai Tea", "Spicy black tea", tea, "$4.99");
         availableGroceryItems.put("1", oscarMeyerHotDog);
         availableGroceryItems.put("2", tazoPassionTea);
         Collection<String> itemsToBePurchased = new ArrayList<>();
+        itemsToBePurchased.add(tazoChaiTea);
         Basket basket = new Basket(printStream, itemsToBePurchased);
         Map<String, Command> groceryCommands = new HashMap<>();
         GroceryCatalog groceryCatalog = new GroceryCatalog(availableGroceryItems, printStream, userInput, basket);

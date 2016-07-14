@@ -12,7 +12,13 @@ public class Basket {
     }
 
     public void display() {
-        printStream.println("This basket is empty");
+        String itemToBePurchased = "";
+
+        for(String item : itemsToBePurchased) {
+            itemToBePurchased += item + "\n";
+        }
+
+       printStream.println(itemToBePurchased);
     }
 
     public void add(String itemToPlaceInBasket) {

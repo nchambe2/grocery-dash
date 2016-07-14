@@ -16,19 +16,24 @@ public class BasketTest {
     private PrintStream printStream;
     private Basket basket;
     private Collection<String> itemsToBePurchased;
+    private String item;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
+        item = "Item to be purchased";
         itemsToBePurchased = new ArrayList<>();
         basket = new Basket(printStream, itemsToBePurchased);
     }
 
+
     @Test
-    public void shouldDisplayBasketIsEmptyMessageWhenThereAreNoItemsInTheBasket() {
+    public void shouldDisplaySingleItemInBasketWheOneItemIsToBePurchased() {
+        itemsToBePurchased.add(item);
+
         basket.display();
 
-        verify(printStream).println(contains("basket is empty"));
+        verify(printStream).println(contains("Item to be purchased"));
     }
 
     @Test
