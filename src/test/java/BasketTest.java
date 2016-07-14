@@ -37,4 +37,11 @@ public class BasketTest {
 
         assertThat(itemsToBePurchased.size(), is(1));
     }
+
+    @Test
+    public void shouldDisplaySuccessMessageWhenItemIsAddedToTheBasket() {
+        basket.add("Juice");
+
+        verify(printStream).println(contains("Item has been added"));
+    }
 }

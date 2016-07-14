@@ -17,6 +17,7 @@ public class Basket {
 
     public void add(String itemToPlaceInBasket) {
         itemsToBePurchased.add(itemToPlaceInBasket);
+        printStream.println("Item has been added to your basket.");
     }
 
     //getting valid input
