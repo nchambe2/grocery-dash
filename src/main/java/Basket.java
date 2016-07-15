@@ -1,11 +1,11 @@
 import java.io.PrintStream;
-import java.util.Collection;
+import java.util.Map;
 
 public class Basket {
     private final PrintStream printStream;
-    private final Collection<String> itemsToBePurchased;
+    private final Map<String, String> itemsToBePurchased;
 
-    public Basket(PrintStream printStream, Collection<String> itemsToBePurchased) {
+    public Basket(PrintStream printStream, Map<String, String> itemsToBePurchased) {
 
         this.printStream = printStream;
         this.itemsToBePurchased = itemsToBePurchased;
@@ -14,16 +14,29 @@ public class Basket {
     public void display() {
         String itemToBePurchased = "";
 
-        for(String item : itemsToBePurchased) {
-            itemToBePurchased += item + "\n";
+        for(Map.Entry<String, String> item : itemsToBePurchased.entrySet()) {
+            itemToBePurchased += item.getKey() + ". " + item.getValue() + "\n";
         }
 
        printStream.println(itemToBePurchased);
     }
 
-    public void add(String itemToPlaceInBasket) {
-        itemsToBePurchased.add(itemToPlaceInBasket);
+    public void add(String itemKey, String itemToPlaceInBasket) {
+        itemsToBePurchased.put(itemKey, itemToPlaceInBasket);
         printStream.println("Item has been added to your basket.");
+    }
+
+    public void remove(String itemKey) {
+        itemsToBePurchased.remove(itemKey);
+        printStream.println("Item has successfully been removed");
+    }
+
+    public Boolean isItemInBasket(String itemKey) {
+        for(Map.Entry<String, String> item : itemsToBePurchased.entrySet()) {
+            return item.getKey().equals(itemKey);
+        }
+
+        return false;
     }
 
     //getting valid input

@@ -116,7 +116,7 @@ public class GroceryCatalogTest {
 
         groceryCatalog.shop();
 
-        verify(basket).add("Title | Description | Category One | Price");
+        verify(basket).add("1", "Title | Description | Category One | Price");
     }
 
     @Test

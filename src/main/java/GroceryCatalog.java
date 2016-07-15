@@ -49,7 +49,7 @@ public class GroceryCatalog {
 
         if(isItemAvailable(itemKey)){
             String itemToPlaceInBasket = availableItems.remove(itemKey);
-            basket.add(itemToPlaceInBasket);
+            basket.add(itemKey, itemToPlaceInBasket);
         } else {
             printStream.println("Item is not available");
         }
@@ -58,5 +58,9 @@ public class GroceryCatalog {
 
     private boolean isItemAvailable(String itemKey) {
         return availableItems.containsKey(itemKey);
+    }
+
+    public void addAvailableItem(String item) {
+
     }
 }

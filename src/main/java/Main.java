@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,22 +20,25 @@ public class Main {
         String tazoChaiTea = String.join(" | ", "Tazo Chai Tea", "Spicy black tea", tea, "$4.99");
         availableGroceryItems.put("1", oscarMeyerHotDog);
         availableGroceryItems.put("2", tazoPassionTea);
-        Collection<String> itemsToBePurchased = new ArrayList<>();
-        itemsToBePurchased.add(tazoChaiTea);
+        Map<String, String> itemsToBePurchased = new HashMap<>();
+        itemsToBePurchased.put("1", tazoChaiTea);
         Basket basket = new Basket(printStream, itemsToBePurchased);
         Map<String, Command> groceryCommands = new HashMap<>();
         GroceryCatalog groceryCatalog = new GroceryCatalog(availableGroceryItems, printStream, userInput, basket);
         Menu menu = new Menu(printStream, groceryCommands);
+        Shopper shopper = new Shopper(printStream, userInput, basket, groceryCatalog);
         Command browseAvailableItemsCommand = new ViewAvailableItemsCommand(availableGroceryItems, groceryCatalog);
         Command browseAvailableCategoriesCommand = new ViewAvailableCategoriesCommand(groceryCatalog, availableCategories);
         Command browseAvailableItemsInACategoryCommand = new ViewAvailableItemsInACategoryCommand(groceryCatalog, printStream, userInput);
         Command viewBasketCommand = new ViewBasketCommand(basket);
         Command addBasketCommand = new AddItemToBasketCommand(groceryCatalog);
+        Command removeItemFromBasket = new RemoveItemFromBasket(shopper);
         groceryCommands.put("View Available Items", browseAvailableItemsCommand);
         groceryCommands.put("View Available Categories", browseAvailableCategoriesCommand);
         groceryCommands.put("View Available Items In A Category", browseAvailableItemsInACategoryCommand);
         groceryCommands.put("View Basket", viewBasketCommand);
         groceryCommands.put("Add Item To Basket", addBasketCommand);
+        groceryCommands.put("Remove Item From Basket", removeItemFromBasket);
         MenuValidator menuValidator = new MenuValidator(printStream, userInput, groceryCommands);
         Application application = new Application(menu, menuValidator, printStream, userInput);
 
