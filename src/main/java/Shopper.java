@@ -4,14 +4,26 @@ public class Shopper {
     private final PrintStream printStream;
     private final UserInput userInput;
     private final Basket basket;
-    private final GroceryCatalog groceryCatalog;
+    private final Inventory inventory;
 
-    public Shopper(PrintStream printStream, UserInput userInput, Basket basket, GroceryCatalog groceryCatalog) {
+    public Shopper(PrintStream printStream, UserInput userInput, Basket basket, Inventory inventory) {
 
         this.printStream = printStream;
         this.userInput = userInput;
         this.basket = basket;
-        this.groceryCatalog = groceryCatalog;
+        this.inventory = inventory;
+    }
+
+    public void shop() {
+        printStream.println("Enter the item number that corresponds with the item you would like to add to your basket");
+
+        String itemKey = userInput.getInput();
+
+        if(inventory.isItemInStock(itemKey)) {
+            inventory.addItemToItemsToBePurchased(itemKey);
+        } else {
+            printStream.println("Item is not in stock");
+        }
     }
 
     public void placeItemBackOnShelf() {
@@ -20,10 +32,9 @@ public class Shopper {
         String itemKey = userInput.getInput();
 
         if(basket.isItemInBasket(itemKey)) {
-            basket.remove(itemKey);
-            groceryCatalog.addAvailableItem(itemKey);
+            basket.returnToInventory(itemKey);
         } else {
-            printStream.println("Item can not be stocked");
+            printStream.println("Item can not be added to inventory");
         }
 
     }

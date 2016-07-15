@@ -1,7 +1,7 @@
-public class RemoveItemFromBasket implements Command {
+public class RemoveItemFromBasketCommand implements Command {
     private final Shopper shopper;
 
-    public RemoveItemFromBasket(Shopper shopper) {
+    public RemoveItemFromBasketCommand(Shopper shopper) {
 
         this.shopper = shopper;
     }

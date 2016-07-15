@@ -2,7 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ public class BasketTest {
     private Map<String, String> itemsToBePurchased;
     private String item;
     private String itemTwo;
+    private Inventory inventory;
 
     @Before
     public void setUp() {
@@ -26,12 +26,13 @@ public class BasketTest {
         item = "Item to be purchased";
         itemTwo = "Item two to be purchased";
         itemsToBePurchased = new HashMap<>();
-        basket = new Basket(printStream, itemsToBePurchased);
+        inventory = mock(Inventory.class);
+        basket = new Basket(printStream, itemsToBePurchased, inventory);
     }
 
 
     @Test
-    public void shouldDisplaySingleItemInBasketWheOneItemIsToBePurchased() {
+    public void shouldDisplayASingleItemWheThereIsOneItemInTheBasket() {
         itemsToBePurchased.put("1", item);
 
         basket.display();
@@ -40,56 +41,44 @@ public class BasketTest {
     }
 
     @Test
-    public void shouldDisplayTwoItemsInABasketWhenMultipleItemsAreToBePurchased() {
+    public void shouldDisplayTwoItemsWhenThereAreMultipleItemsInTheBasket() {
         itemsToBePurchased.put("1", item);
         itemsToBePurchased.put("2", itemTwo);
 
         basket.display();
 
-        verify(printStream).println(contains("Item to be purchased\nItem two to be purchase"));
-    }
-
-    @Test
-    public void shouldRemoveItemFromAvailableGroceryItemsWhenAddingAnItemToABasket() {
-        basket.add("1", "Juice");
-
-        assertThat(itemsToBePurchased.size(), is(1));
-    }
-
-    @Test
-    public void shouldDisplaySuccessMessageWhenItemIsAddedToTheBasket() {
-        basket.add("1", "Juice");
-
-        verify(printStream).println(contains("Item has been added"));
-    }
-
-    @Test
-    public void shouldRemoveItemFromBasketWhenCalled() {
-        itemsToBePurchased.put("1", item);
-
-        basket.remove(item);
-
-        assertThat(itemsToBePurchased.size(), is(0));
-    }
-
-    @Test
-    public void shouldDisplaySuccessMessageWhenItemIsRemovedFromBasket() {
-        basket.remove("1");
-
-        verify(printStream).println(contains("Item has successfully been removed"));
+        verify(printStream).println(contains("1. Item to be purchased\n2. Item two to be purchase"));
     }
 
     @Test
     public void shouldReturnTrueWhenItemIsInBasket() {
         itemsToBePurchased.put("1", item);
 
-        assertThat(basket.isItemInBasket("Item to be purchased"), is(true));
+        assertThat(basket.isItemInBasket("1"), is(true));
     }
 
     @Test
     public void shouldReturnFalseWhenItemIsNotInBasket() {
         itemsToBePurchased.put("1", item);
 
-        assertThat(basket.isItemInBasket("Item"), is(false));
+        assertThat(basket.isItemInBasket("2"), is(false));
+    }
+
+    @Test
+    public void shouldRemoveItemFromItemsToBePurchasedListWhenReturningInventory() {
+        itemsToBePurchased.put("1", item);
+
+        basket.returnToInventory("1");
+
+        assertThat(itemsToBePurchased.size(), is(0));
+    }
+
+    @Test
+    public void shouldPlaceItemBackInTheInventoryWhenPlacingOnShelf(){
+        itemsToBePurchased.put("1", item);
+
+        basket.returnToInventory("1");
+
+        verify(inventory).add("1", item);
     }
 }

@@ -5,7 +5,7 @@ import static org.mockito.Mockito.verify;
 
 public class ViewBasketCommandTest {
     @Test
-    public void shouldDisplayItemsInTheBasketWhenRun() {
+    public void shouldDisplayItemsInBasketWhenRun() {
         Basket basket = mock(Basket.class);
         ViewBasketCommand viewBasketCommand = new ViewBasketCommand(basket);
 

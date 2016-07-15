@@ -1,5 +1,16 @@
-/**
- * Created by nicollettec on 7/13/16.
- */
-public class QuitCommand {
+import java.io.PrintStream;
+
+public class QuitCommand implements Command {
+
+    private final PrintStream printStream;
+
+    public QuitCommand(PrintStream printStream) {
+
+        this.printStream = printStream;
+    }
+
+    @Override
+    public void run() {
+        printStream.println("Goodbye!");
+    }
 }

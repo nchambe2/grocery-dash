@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
@@ -14,59 +16,86 @@ public class ShopperTest {
     private UserInput userInput;
     private Shopper shopper;
     private Basket basket;
-    private GroceryCatalog groceryCatalog;
-    private String item;
+    private Inventory inventory;
+    private Map<String, String> availableGroceryItems;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         userInput = mock(UserInput.class);
         basket = mock(Basket.class);
-        groceryCatalog = mock(GroceryCatalog.class);
-        shopper = new Shopper(printStream, userInput, basket, groceryCatalog);
+        inventory = mock(Inventory.class);
+        availableGroceryItems = new HashMap<>();
+        shopper = new Shopper(printStream, userInput, basket, inventory);
     }
 
     @Test
-    public void shouldPromptUserToSelectAnItemWhenPlacingAnItemBackOnShelf() {
+    public void shouldPromptUserToEnterNameOfItemWhenShopping() {
+        shopper.shop();
+
+        verify(printStream).println(contains("item number that corresponds with the item you would like to add to your basket"));
+    }
+
+    @Test
+    public void shouldGetItemToAddToBasketWhenUserHasBeenPrompted() {
+        shopper.shop();
+
+        verify(userInput).getInput();
+    }
+
+    @Test
+    public void shouldMoveItemToBasketWhenItemIsInStock() {
+        when(userInput.getInput()).thenReturn("1");
+        when(inventory.isItemInStock("1")).thenReturn(true);
+
+        shopper.shop();
+
+        verify(inventory).addItemToItemsToBePurchased("1");
+    }
+
+
+    @Test
+    public void shouldDisplayItemNotInStockMessageWhenItemIsNotInStock() {
+        when(userInput.getInput()).thenReturn("5");
+        availableGroceryItems.put("1", "Title | Description | Category One | Price");
+
+        shopper.shop();
+
+        verify(printStream).println(contains("Item is not in stock"));
+    }
+
+    @Test
+    public void shouldPromptUserToSelectItemToPlaceBackOnShelfWhenCalled() {
         shopper.placeItemBackOnShelf();
 
        verify(printStream).println(contains("select item to place on shelf"));
     }
 
     @Test
-    public void shouldGetUserInputWhenPlacingAnItemBackOnShelf() {
+    public void shouldGetItemToPlaceOnShelfWhenUserHasBeenPrompted() {
         shopper.placeItemBackOnShelf();
 
         verify(userInput).getInput();
     }
 
     @Test
-    public void shouldRemoveItemFromBasketWhenItemSelectedIsCurrentlyInTheBasket() {
-        when(userInput.getInput()).thenReturn("Item");
-        when(basket.isItemInBasket("Item")).thenReturn(true);
+    public void shouldReturnItemToInventoryWhenItemIsInBasket() {
+        when(userInput.getInput()).thenReturn("1");
+        when(basket.isItemInBasket("1")).thenReturn(true);
 
         shopper.placeItemBackOnShelf();
 
-        verify(basket).remove("Item");
+        verify(basket).returnToInventory("1");
     }
 
     @Test
-    public void shouldAddItemToBasketWhenItemSelectedHasBeenRemovedFromBasket() {
-        when(userInput.getInput()).thenReturn("Item");
-        when(basket.isItemInBasket("Item")).thenReturn(true);
+    public void shouldDisplayUnableToAddToInventoryMessageWhenItemIsNotInBasket() {
+        when(userInput.getInput()).thenReturn("Item Key");
+        when(basket.isItemInBasket("Incorrect Item Key")).thenReturn(false);
 
         shopper.placeItemBackOnShelf();
 
-        verify(groceryCatalog).addAvailableItem("Item");
+        verify(printStream).println(contains("can not be added to inventory"));
     }
 
-    @Test
-    public void shouldDisplayUnableToStockMessageWhenItemIsNotInBasket() {
-        when(userInput.getInput()).thenReturn("Item");
-        when(basket.isItemInBasket("Item")).thenReturn(false);
-
-        shopper.placeItemBackOnShelf();
-
-        verify(printStream).println(contains("can not be stocked"));
-    }
 }

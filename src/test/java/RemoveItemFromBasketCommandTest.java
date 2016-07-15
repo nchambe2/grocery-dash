@@ -3,14 +3,14 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class RemoveItemFromBasketTest {
+public class RemoveItemFromBasketCommandTest {
 
     @Test
     public void shouldRemoveItemFromBasketWhenRun() {
         Shopper shopper = mock(Shopper.class);
-        RemoveItemFromBasket removeItemFromBasket = new RemoveItemFromBasket(shopper);
+        RemoveItemFromBasketCommand removeItemFromBasketCommand = new RemoveItemFromBasketCommand(shopper);
 
-        removeItemFromBasket.run();
+        removeItemFromBasketCommand.run();
 
         verify(shopper).placeItemBackOnShelf();
     }

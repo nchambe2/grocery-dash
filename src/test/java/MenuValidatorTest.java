@@ -12,7 +12,6 @@ public class MenuValidatorTest {
 
     private PrintStream printStream;
     private MenuValidator menuValidator;
-    private UserInput userInput;
     //question about collections
     private Map<String, Command> groceryCommands;
     private Command browseItemsCommand;
@@ -20,27 +19,25 @@ public class MenuValidatorTest {
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        userInput = mock(UserInput.class);
         browseItemsCommand = mock(Command.class);
         groceryCommands = new HashMap<>();
-        menuValidator = new MenuValidator(printStream, userInput, groceryCommands);
-
+        menuValidator = new MenuValidator(printStream, groceryCommands);
     }
 
     @Test
-    public void shouldRunCommandWhenValidGroceryCommand() {
-        groceryCommands.put("Amazing Command", browseItemsCommand);
+    public void shouldRunBrowseItemsCommandWhenUserInputMapsToAGroceryCommand() {
+        groceryCommands.put("1", browseItemsCommand);
 
-        menuValidator.validate("Amazing Command");
+        menuValidator.validate("1");
 
         verify(browseItemsCommand).run();
     }
 
     @Test
     public void shouldDisplayInvalidSelectionMessageWhenUserInputIsNotAGroceryCommand() {
-        groceryCommands.put("Browse Available Items", browseItemsCommand);
+        groceryCommands.put("1", browseItemsCommand);
 
-        menuValidator.validate("Invalid Command");
+        menuValidator.validate("2");
 
         verify(printStream).println(contains("Invalid Selection"));
     }

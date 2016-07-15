@@ -27,15 +27,16 @@ public class ApplicationTest {
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationStarts() {
-        when(userInput.getInput()).thenReturn("0");
+        when(userInput.getInput()).thenReturn("Quit");
+
         application.start();
 
         verify(printStream).println(contains("Welcome"));
     }
 
     @Test
-    public void shouldDisplayMenuOptionsWhenApplicationStarts() {
-        when(userInput.getInput()).thenReturn("0");
+    public void shouldDisplayMenuOptionsWhenWelcomeMessageHasPrinted() {
+        when(userInput.getInput()).thenReturn("Quit");
 
         application.start();
 
@@ -43,18 +44,26 @@ public class ApplicationTest {
     }
 
     @Test
-    public void shouldValidateUserMenuOptionSelectionWhenCalled() {
-        when(userInput.getInput()).thenReturn("0");
+    public void shouldGetUserInputWhenMeuHasBeenDisplayed() {
+        when(userInput.getInput()).thenReturn("Quit");
 
         application.start();
 
-        verify(menuValidator).validate("0");
+        verify(userInput).getInput();
     }
 
+    @Test
+    public void shouldValidateMenuOptionUserSelectsWhenCalled() {
+        when(userInput.getInput()).thenReturn("Quit");
+
+        application.start();
+
+        verify(menuValidator).validate("Quit");
+    }
 
     @Test
-    public void shouldQuitWhenUserInputIsZero () {
-        when(userInput.getInput()).thenReturn("1").thenReturn("0");
+    public void shouldQuitApplicationWhenUserInputIsZero () {
+        when(userInput.getInput()).thenReturn("Menu Selection").thenReturn("Quit");
 
         application.start();
 

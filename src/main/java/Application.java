@@ -21,8 +21,12 @@ public class Application {
             menu.display();
             userOption = userInput.getInput();
             menuValidator.validate(userOption);
-        }while(!userOption.equals("0"));
+        }while(userHasNotQuit(userOption));
 
+    }
+
+    private boolean userHasNotQuit(String userOption) {
+        return !userOption.equals("Quit");
     }
 
 }

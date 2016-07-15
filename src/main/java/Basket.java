@@ -4,11 +4,13 @@ import java.util.Map;
 public class Basket {
     private final PrintStream printStream;
     private final Map<String, String> itemsToBePurchased;
+    private final Inventory inventory;
 
-    public Basket(PrintStream printStream, Map<String, String> itemsToBePurchased) {
+    public Basket(PrintStream printStream, Map<String, String> itemsToBePurchased, Inventory inventory) {
 
         this.printStream = printStream;
         this.itemsToBePurchased = itemsToBePurchased;
+        this.inventory = inventory;
     }
 
     public void display() {
@@ -21,22 +23,13 @@ public class Basket {
        printStream.println(itemToBePurchased);
     }
 
-    public void add(String itemKey, String itemToPlaceInBasket) {
-        itemsToBePurchased.put(itemKey, itemToPlaceInBasket);
-        printStream.println("Item has been added to your basket.");
-    }
-
-    public void remove(String itemKey) {
-        itemsToBePurchased.remove(itemKey);
-        printStream.println("Item has successfully been removed");
-    }
-
     public Boolean isItemInBasket(String itemKey) {
-        for(Map.Entry<String, String> item : itemsToBePurchased.entrySet()) {
-            return item.getKey().equals(itemKey);
-        }
+        return itemsToBePurchased.containsKey(itemKey);
+    }
 
-        return false;
+    public void returnToInventory(String itemKey) {
+       String itemInformation = itemsToBePurchased.remove(itemKey);
+       inventory.add(itemKey, itemInformation);
     }
 
     //getting valid input

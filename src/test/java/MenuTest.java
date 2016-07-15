@@ -7,7 +7,6 @@ import java.util.Map;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class MenuTest {
@@ -17,7 +16,6 @@ public class MenuTest {
     private Map<String, Command> groceryCommands;
     private Command commandOne;
     private Command commandTwo;
-    private Command browseAvailableItemsInACategory;
 
     @Before
     public void setUp() {
@@ -29,23 +27,22 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldDisplayASingleCommandWhenThereIsOnlyOneGroceryCommand() {
+    public void shouldDisplayCommandOneWhenThereIsOneGroceryCommand() {
         groceryCommands.put("Command One", commandOne);
 
         menu.display();
 
-        verify(printStream, times(1)).println(contains("Command One"));
+        verify(printStream).println(contains("Command One"));
     }
 
     @Test
-    public void shouldDisplayTwoCommandsWhenThereAreMultipleCommands() {
+    public void shouldDisplayCommandOneAndTwoWhenThereAreMultipleCommands() {
         groceryCommands.put("Command One", commandOne);
         groceryCommands.put("Command Two", commandTwo);
 
         menu.display();
 
-        verify(printStream).println(contains("Command One"));
-        verify(printStream).println(contains("Command Two"));
+        verify(printStream).println(contains("Command One\nCommand Two\n"));
     }
 
 }

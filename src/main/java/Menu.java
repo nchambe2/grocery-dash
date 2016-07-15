@@ -6,15 +6,18 @@ public class Menu {
     private final Map<String, Command> groceryCommands;
 
     public Menu(PrintStream printStream, Map<String, Command> groceryCommands) {
-
         this.printStream = printStream;
         this.groceryCommands = groceryCommands;
     }
 
     public void display() {
+        String commandKeys = "";
+
         for(Map.Entry<String, Command> command : groceryCommands.entrySet()) {
-            printStream.println(command.getKey() + "\n");
+            commandKeys += command.getKey() + "\n";
         }
+
+        printStream.println(commandKeys);
     }
 
 }

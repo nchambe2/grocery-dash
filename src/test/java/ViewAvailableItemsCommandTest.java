@@ -10,22 +10,22 @@ import static org.mockito.Mockito.verify;
 
 public class ViewAvailableItemsCommandTest {
 
-    private GroceryCatalog groceryCatalog;
+    private Inventory inventory;
     private ViewAvailableItemsCommand viewAvailableItemsCommand;
     private Map<String, String> availableGroceryItems;
 
     @Before
     public void setUp() {
         availableGroceryItems = new HashMap<>();
-        groceryCatalog = mock(GroceryCatalog.class);
-        viewAvailableItemsCommand = new ViewAvailableItemsCommand(availableGroceryItems, groceryCatalog);
+        inventory = mock(Inventory.class);
+        viewAvailableItemsCommand = new ViewAvailableItemsCommand(availableGroceryItems, inventory);
     }
 
     @Test
-    public void shouldListAvailableItemsWhenCalled() {
+    public void shouldListAvailableItemsWhenCommandIsRun() {
         viewAvailableItemsCommand.run();
 
-        verify(groceryCatalog).list(availableGroceryItems);
+        verify(inventory).list(availableGroceryItems);
     }
 
 }

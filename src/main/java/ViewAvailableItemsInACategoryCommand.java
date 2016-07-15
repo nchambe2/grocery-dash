@@ -2,12 +2,12 @@ import java.io.PrintStream;
 
 public class ViewAvailableItemsInACategoryCommand implements Command {
 
-    private final GroceryCatalog groceryCatalog;
+    private final Inventory inventory;
     private final PrintStream printStream;
     private final UserInput userInput;
 
-    public ViewAvailableItemsInACategoryCommand(GroceryCatalog groceryCatalog, PrintStream printStream, UserInput userInput) {
-        this.groceryCatalog = groceryCatalog;
+    public ViewAvailableItemsInACategoryCommand(Inventory inventory, PrintStream printStream, UserInput userInput) {
+        this.inventory = inventory;
         this.printStream = printStream;
         this.userInput = userInput;
     }
@@ -18,6 +18,6 @@ public class ViewAvailableItemsInACategoryCommand implements Command {
 
         String selectedCategory = userInput.getInput();
 
-       groceryCatalog.listItemsIn(selectedCategory);
+       inventory.listItemsIn(selectedCategory);
     }
 }

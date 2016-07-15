@@ -12,6 +12,7 @@ public class UserInput {
 
     public String getInput() {
         String userInput = "";
+
         try {
             userInput = bufferedReader.readLine();
         } catch (IOException e) {
