@@ -12,20 +12,18 @@ public class ViewAvailableItemsCommandTest {
 
     private Inventory inventory;
     private ViewAvailableItemsCommand viewAvailableItemsCommand;
-    private Map<String, String> availableGroceryItems;
 
     @Before
     public void setUp() {
-        availableGroceryItems = new HashMap<>();
         inventory = mock(Inventory.class);
-        viewAvailableItemsCommand = new ViewAvailableItemsCommand(availableGroceryItems, inventory);
+        viewAvailableItemsCommand = new ViewAvailableItemsCommand(inventory);
     }
 
     @Test
     public void shouldListAvailableItemsWhenCommandIsRun() {
         viewAvailableItemsCommand.run();
 
-        verify(inventory).list(availableGroceryItems);
+        verify(inventory).list();
     }
 
 }

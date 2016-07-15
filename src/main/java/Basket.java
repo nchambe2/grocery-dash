@@ -3,10 +3,10 @@ import java.util.Map;
 
 public class Basket {
     private final PrintStream printStream;
-    private final Map<String, String> itemsToBePurchased;
+    private final Map<String, Item> itemsToBePurchased;
     private final Inventory inventory;
 
-    public Basket(PrintStream printStream, Map<String, String> itemsToBePurchased, Inventory inventory) {
+    public Basket(PrintStream printStream, Map<String, Item> itemsToBePurchased, Inventory inventory) {
 
         this.printStream = printStream;
         this.itemsToBePurchased = itemsToBePurchased;
@@ -16,8 +16,8 @@ public class Basket {
     public void display() {
         String itemToBePurchased = "";
 
-        for(Map.Entry<String, String> item : itemsToBePurchased.entrySet()) {
-            itemToBePurchased += item.getKey() + ". " + item.getValue() + "\n";
+        for(Map.Entry<String, Item> item : itemsToBePurchased.entrySet()) {
+            itemToBePurchased += item.getKey() + ". " + item.getValue().details() + "\n";
         }
 
        printStream.println(itemToBePurchased);
@@ -28,7 +28,7 @@ public class Basket {
     }
 
     public void returnToInventory(String itemKey) {
-       String itemInformation = itemsToBePurchased.remove(itemKey);
+       Item itemInformation = itemsToBePurchased.remove(itemKey);
        inventory.add(itemKey, itemInformation);
     }
 

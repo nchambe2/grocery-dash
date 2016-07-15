@@ -10,21 +10,22 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class BasketTest {
 
     private PrintStream printStream;
     private Basket basket;
-    private Map<String, String> itemsToBePurchased;
-    private String item;
-    private String itemTwo;
+    private Map<String, Item> itemsToBePurchased;
+    private Item item;
+    private Item itemTwo;
     private Inventory inventory;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        item = "Item to be purchased";
-        itemTwo = "Item two to be purchased";
+        item = mock(Item.class);
+        itemTwo = mock(Item.class);
         itemsToBePurchased = new HashMap<>();
         inventory = mock(Inventory.class);
         basket = new Basket(printStream, itemsToBePurchased, inventory);
@@ -33,6 +34,7 @@ public class BasketTest {
 
     @Test
     public void shouldDisplayASingleItemWheThereIsOneItemInTheBasket() {
+        when(item.details()).thenReturn("Item to be purchased");
         itemsToBePurchased.put("1", item);
 
         basket.display();
@@ -42,6 +44,8 @@ public class BasketTest {
 
     @Test
     public void shouldDisplayTwoItemsWhenThereAreMultipleItemsInTheBasket() {
+        when(item.details()).thenReturn("Item to be purchased");
+        when(itemTwo.details()).thenReturn("Item two to be purchased");
         itemsToBePurchased.put("1", item);
         itemsToBePurchased.put("2", itemTwo);
 

@@ -1,13 +1,9 @@
-import java.util.Map;
-
 public class ViewAvailableItemsCommand implements Command{
 
-    private final Map<String, String> availableGroceryItems;
     private final Inventory inventory;
 
-    public ViewAvailableItemsCommand(Map<String, String> availableGroceryItems, Inventory inventory) {
+    public ViewAvailableItemsCommand(Inventory inventory) {
 
-        this.availableGroceryItems = availableGroceryItems;
         this.inventory = inventory;
     }
 
@@ -15,6 +11,6 @@ public class ViewAvailableItemsCommand implements Command{
     //just move behavior into class
     @Override
     public void run() {
-        inventory.list(availableGroceryItems);
+        inventory.list();
     }
 }
